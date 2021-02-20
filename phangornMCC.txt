@@ -1,0 +1,19 @@
+#estimates MCC tree
+
+library(ape)
+library(phangorn)
+
+setwd("c:/a")
+
+t1 <- read.nexus("TE-alltaxa-clock-noCOI3-notreeage-FBD1.1.t.nex")
+t2 <- read.nexus("TE-alltaxa-clock-noCOI3-notreeage-FBD1.2.t.nex")
+t3 <- read.nexus("TE-alltaxa-clock-noCOI3-notreeage-FBD2.1.t.nex")
+t4 <- read.nexus("TE-alltaxa-clock-noCOI3-notreeage-FBD2.2.t.nex")
+
+trees <- c(t1,t2,t3,t4)
+class(trees)<-"multiPhylo"
+
+mcc <- maxCladeCred(trees, tree = TRUE, part = NULL, rooted = TRUE)
+ 
+write.tree(mcc, "mcc.tre")
+write.tree(trees, "combined.tre")
